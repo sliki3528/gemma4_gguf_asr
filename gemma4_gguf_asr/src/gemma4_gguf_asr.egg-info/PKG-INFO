@@ -1,0 +1,63 @@
+Metadata-Version: 2.4
+Name: gemma4-gguf-asr
+Version: 0.1.0
+Summary: Gemma 4 GGUF + mmproj WAV transcription via llama-cpp-python (libmtmd audio)
+Author: chizizic contributors
+License: MIT
+Project-URL: Homepage, https://github.com/example/gemma4-gguf-asr
+Keywords: gemma,gguf,asr,speech,llama-cpp,mtmd
+Classifier: Programming Language :: Python :: 3
+Classifier: Programming Language :: Python :: 3.10
+Classifier: Programming Language :: Python :: 3.11
+Classifier: Programming Language :: Python :: 3.12
+Requires-Python: >=3.10
+Description-Content-Type: text/markdown
+Requires-Dist: numpy>=1.24
+Requires-Dist: soundfile>=0.12
+Requires-Dist: llama-cpp-python>=0.3.20
+Provides-Extra: resample
+Requires-Dist: torch; extra == "resample"
+Requires-Dist: torchaudio; extra == "resample"
+
+# gemma4-gguf-asr
+
+Gemma 4 **GGUF + mmproj** 폴더에서 **WAV → 텍스트** 전사를 수행합니다.  
+`llama-cpp-python`의 **libmtmd** 오디오 경로가 켜진 빌드가 필요합니다 (llama.cpp PR #21421 계열).
+
+## 설치
+
+```bash
+pip install -e .
+# 선택: 리샘플용
+pip install -e ".[resample]"
+```
+
+별도 저장소로만 쓸 때는 이 폴더를 그대로 복사해 `pyproject.toml` 기준으로 패키징하면 됩니다.
+
+## 사용
+
+```python
+from pathlib import Path
+from gemma4_gguf_asr import Gemma4GgufMtmdEngine
+
+eng = Gemma4GgufMtmdEngine(
+    model_dir=Path("/path/to/gemma-4-E4B-it-GGUF"),
+    n_ctx=8192,
+    n_gpu_layers=-1,
+    n_batch=512,
+)
+print(eng.health())
+text = eng.transcribe("clip.wav", language="Korean", max_seconds=8.0)
+print(text)
+```
+
+## 모델 파일
+
+`model_dir` 안에 다음이 있어야 합니다.
+
+- 메인 가중치: 이름이 `gemma-4`로 시작하고 `mmproj`가 **아닌** `.gguf`
+- 멀티모달 프로젝션: 이름에 `mmproj`가 들어간 `.gguf`
+
+## 라이선스
+
+MIT (프로젝트 정책에 맞게 수정 가능)

@@ -1,0 +1,9 @@
+README.md
+pyproject.toml
+src/gemma4_gguf_asr/__init__.py
+src/gemma4_gguf_asr/engine.py
+src/gemma4_gguf_asr.egg-info/PKG-INFO
+src/gemma4_gguf_asr.egg-info/SOURCES.txt
+src/gemma4_gguf_asr.egg-info/dependency_links.txt
+src/gemma4_gguf_asr.egg-info/requires.txt
+src/gemma4_gguf_asr.egg-info/top_level.txt

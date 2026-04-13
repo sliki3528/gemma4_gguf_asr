@@ -1,0 +1,7 @@
+numpy>=1.24
+soundfile>=0.12
+llama-cpp-python>=0.3.20
+
+[resample]
+torch
+torchaudio
