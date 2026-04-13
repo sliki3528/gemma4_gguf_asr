@@ -11,10 +11,6 @@ Testing environment: **Gemma 4 E2B** model with a **120s (16kHz, Mono) WAV file*
 
 | Metric | NVIDIA RTX 3090 Ti | NVIDIA RTX 3060 |
 | :--- | :---: | :---: |
-| **Prefill (Audio processing)** | 20.42s | 21.08s |
-| **Generation (Text output)** | 16.24 tok/s | 16.62 tok/s |
-| **Total elapsed time** | 84.7s | 84.0s |
-
-### Technical Note
-* The performance (tokens per second) is nearly identical between the RTX 3090 Ti and RTX 3060.
-* This suggests that the current bottleneck may reside in the audio-processing optimization of the engine (llama.cpp) rather than hardware limitations.
+| **Prefill (Audio processing)** | 1.5651s | 3.3417s |
+| **Generation (Text output)** | 86.41 tok/s | 33.52 tok/s |
+| **Total elapsed time** | 14.656s | 35.078s |
